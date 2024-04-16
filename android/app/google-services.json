@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "509452357758",
+    "project_id": "paymen-fbapp",
+    "storage_bucket": "paymen-fbapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:509452357758:android:0b37d7f85edd70c4cd482f",
+        "android_client_info": {
+          "package_name": "com.brothers.paymen"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYWQ62rhVHBSVlsFTXyQPxSr5tI7UOeqo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

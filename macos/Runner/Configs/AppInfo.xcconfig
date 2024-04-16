@@ -8,7 +8,7 @@
 PRODUCT_NAME = paymen
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.brothers.payment.paymen
+PRODUCT_BUNDLE_IDENTIFIER = com.brothers.paymen
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2024 com.brothers.payment. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2024 com.brothers. All rights reserved.
