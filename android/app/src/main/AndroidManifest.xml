@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"  package="com.brothers.paymen">
     <application
         android:label="paymen"
-        android:name="${applicationName}"
+      
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

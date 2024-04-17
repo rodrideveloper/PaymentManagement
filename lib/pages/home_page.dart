@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:paymen/bloc/people_bloc.dart';
 import 'package:paymen/models/people.dart';
@@ -26,10 +25,9 @@ class _HomePAgeState extends State<HomePAge> {
               );
 
             case Status.completed:
-              ListPeopleWidget(
+              return ListPeopleWidget(
                 peoples: state.people,
               );
-              break;
 
             default:
               const Center(
@@ -56,25 +54,45 @@ class ListPeopleWidget extends StatefulWidget {
 class _ListPeopleWidgetState extends State<ListPeopleWidget> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: widget.peoples.length,
-      itemBuilder: (context, index) => ListTile(
-        leading: const Icon(Icons.people),
-        title: Text(widget.peoples[index].name),
-        trailing: Row(
-          children: [
-            const Text('Debe?'),
-            Container(
-              width: 50,
-              height: 50,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Flexible(
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: widget.peoples.length,
+            itemBuilder: (context, index) => Container(
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: widget.peoples[index].debtor ? Colors.green : Colors.red,
+                borderRadius: BorderRadius.circular(8),
+                color: Theme.of(context).colorScheme.background,
               ),
-            )
-          ],
+              child: Card(
+                elevation: 0,
+                child: ListTile(
+                  leading: const Icon(
+                    Icons.person,
+                    color: Colors.blueAccent,
+                  ),
+                  title: Text(
+                    widget.peoples[index].name,
+                    textAlign: TextAlign.center,
+                  ),
+                  trailing: Container(
+                    width: 25,
+                    height: 25,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: widget.peoples[index].debtor
+                          ? Colors.green
+                          : Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 }

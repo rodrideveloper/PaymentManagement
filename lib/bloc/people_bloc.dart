@@ -13,10 +13,10 @@ class PeopleBloc extends Bloc<PeopleEvent, PeopleState> {
     on<GetPeopleEvent>(getPeople);
   }
 
-  FutureOr<void> getPeople(event, emit) {
+  FutureOr<void> getPeople(event, emit) async {
     emit(state.copyWith(status: Status.loading));
 
-    emit.onEach<List<People>>(
+    await emit.onEach<List<People>>(
       peopleService.getPeople(),
       onData: (List<People> peoples) => emit(
         state.copyWith(

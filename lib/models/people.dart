@@ -1,7 +1,7 @@
 class People {
   final String id;
   final String name;
-  final String edad;
+  final int edad;
 
   // Has debts?
   final bool debtor;
