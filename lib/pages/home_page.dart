@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:paymen/bloc/people_bloc.dart';
+import 'package:paymen/models/add_dialog.dart';
 import 'package:paymen/models/people.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePAge extends StatefulWidget {
   const HomePAge({super.key});
@@ -10,10 +13,45 @@ class HomePAge extends StatefulWidget {
   State<HomePAge> createState() => _HomePAgeState();
 }
 
+
 class _HomePAgeState extends State<HomePAge> {
+
+  void _mostrarDialogo(BuildContext context) {
+    MiDialogo.mostrar(context, _guardarDatosFirebase);
+  }
+
+Future<void> _guardarDatosFirebase(String documento, String nombreApellido, int edad) async {
+  CollectionReference peoples = FirebaseFirestore.instance.collection('Peoples');
+
+  try {
+    await peoples.add({
+      'ID': '',
+      'documento': documento,
+      'nombreApellido': nombreApellido,
+      'edad': edad,
+    });
+    print("Datos guardados en Firestore");
+  } catch (e) {
+    print("Error al guardar datos: $e");
+  }
+}
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Test"),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add_box),
+            onPressed: () {
+               _mostrarDialogo(context); 
+            },
+          ),
+        ],
+      ),
       body: BlocBuilder<PeopleBloc, PeopleState>(
         builder: (context, state) {
           final currentStatus = state.status;
@@ -30,17 +68,17 @@ class _HomePAgeState extends State<HomePAge> {
               );
 
             default:
-              const Center(
-                child: Text('Incial, vacio o error'),
+              return const Center(
+                child: Text('Inicial, vacío o error'),
               );
           }
-
-          return SizedBox.shrink();
         },
       ),
     );
   }
 }
+
+
 
 class ListPeopleWidget extends StatefulWidget {
   const ListPeopleWidget({super.key, required this.peoples});
