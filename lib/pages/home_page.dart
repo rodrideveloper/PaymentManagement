@@ -1,11 +1,11 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:paymen/bloc/people_bloc.dart';
-import 'package:paymen/models/add_dialog.dart';
+import 'package:paymen/models/addpeople.dart';
 import 'package:paymen/models/people.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:paymen/services.dart/people_service.dart'; 
 class HomePAge extends StatefulWidget {
   const HomePAge({super.key});
 
@@ -15,27 +15,12 @@ class HomePAge extends StatefulWidget {
 
 
 class _HomePAgeState extends State<HomePAge> {
-
-  void _mostrarDialogo(BuildContext context) {
-    MiDialogo.mostrar(context, _guardarDatosFirebase);
-  }
-
-Future<void> _guardarDatosFirebase(String documento, String nombreApellido, int edad) async {
-  CollectionReference peoples = FirebaseFirestore.instance.collection('Peoples');
-
-  try {
-    await peoples.add({
-      'ID': '',
-      'documento': documento,
-      'nombreApellido': nombreApellido,
-      'edad': edad,
-    });
-    print("Datos guardados en Firestore");
-  } catch (e) {
-    print("Error al guardar datos: $e");
-  }
+final PeopleService _peopleService = PeopleService();
+void _mostrarDialogo(context) {
+  SlidingPanel.showPanel(context, (documento, nombreApellido, edad, debtor) {
+    _peopleService.savePeople(documento, nombreApellido, edad, debtor);
+  });
 }
-
 
   @override
   Widget build(BuildContext context) {

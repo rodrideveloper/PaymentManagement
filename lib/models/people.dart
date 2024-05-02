@@ -2,7 +2,7 @@ class People {
   final String id;
   final String name;
   final int edad;
-
+  final String documento;
   // Has debts?
   final bool debtor;
 
@@ -11,6 +11,7 @@ class People {
     required this.name,
     required this.edad,
     required this.debtor,
+    required this.documento,
   });
 
 factory People.fromJson(Map<String, dynamic> json) {
@@ -19,6 +20,7 @@ factory People.fromJson(Map<String, dynamic> json) {
     edad: json['edad'] as int,
     id: json['id'] as String,
     name: json['name'] as String,
+    documento: json['documento'] as String,
   );
 }
 
@@ -28,6 +30,8 @@ factory People.fromJson(Map<String, dynamic> json) {
         "debtor": p.debtor,
         "edad": p.edad,
         "id": p.id,
-        "name": p.name
+        "name": p.name,
+        "documento": documento,
       };
 }
+
