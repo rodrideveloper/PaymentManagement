@@ -12,8 +12,7 @@ class PeopleBloc extends Bloc<PeopleEvent, PeopleState> {
   PeopleBloc({required this.peopleService}) : super(PeopleState.initial()) {
     on<GetPeopleEvent>(getPeople);
   }
-
-  FutureOr<void> getPeople(event, emit) async {
+FutureOr<void> getPeople(event, emit) async {
     emit(state.copyWith(status: Status.loading));
 
     await emit.onEach<List<People>>(
@@ -26,4 +25,5 @@ class PeopleBloc extends Bloc<PeopleEvent, PeopleState> {
       ),
     );
   }
+
 }

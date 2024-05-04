@@ -13,11 +13,16 @@ class People {
     required this.debtor,
   });
 
-  factory People.fromJson(Map<String, dynamic> json) => People(
-      debtor: json['debtor'],
-      edad: json['edad'],
-      id: json['id'],
-      name: json['name']);
+factory People.fromJson(Map<String, dynamic> json) {
+  return People(
+    debtor: json['debtor'] as bool ?? false, 
+    edad: json['edad'] as int,
+    id: json['id'] as String,
+    name: json['name'] as String,
+  );
+}
+
+
 
   Map<String, dynamic> toJson(People p) => <String, dynamic>{
         "debtor": p.debtor,
